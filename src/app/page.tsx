@@ -5,6 +5,9 @@ import useSWRMutation from 'swr/mutation'
 
 async function sendRequest(url: string, { arg }: { arg: { email: string }}) {
   return fetch(url, {
+    headers: {
+      'Content-Type': 'application/json'
+    },
     method: 'POST',
     body: JSON.stringify(arg)
   }).then(res => res.json())
@@ -17,7 +20,7 @@ export default function Home() {
   const [message, setMessage] = useState('')
 
   // repalce with your own endpoint url
-  const { trigger } = useSWRMutation('https://byq3nrmbgm.us.aircode.run/hello', sendRequest, /* options */)
+  const { trigger } = useSWRMutation('https://byq3nrmbgm.us.aircode.run/subscribe', sendRequest, /* options */)
 
   const onSubscribe = async (_e: React.FormEvent<HTMLFormElement>) => {
     _e.preventDefault();
